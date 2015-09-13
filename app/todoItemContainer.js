@@ -16,11 +16,10 @@ const TodoItemContainer = React.createClass({
   },
 
   render() {
-    var todos = [1,2,3,4]
     return (
       <div style={styles.base} className='container'>
-        { todos.map((t) => {
-            return <TodoItem task={t}/>
+        { this.props.todos.map((task, index) => {
+            return <TodoItem task={task} />
           })
         }
       </div>

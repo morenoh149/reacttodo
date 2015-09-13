@@ -25,12 +25,17 @@ var styles = {
  * Top level Component
  */
 const App = React.createClass({
+  getInitialState() {
+    return {
+      todos: [1,2,3,4]
+    }
+  },
   render() {
     return (
      <div style={styles.base}>
         <h1 style={styles.heading}>Todos</h1>
         <AddTodo />
-        <TodoItemContainer />
+        <TodoItemContainer todos={this.state.todos} />
         <Footer />
       </div>
     )

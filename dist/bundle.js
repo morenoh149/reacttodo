@@ -88,6 +88,11 @@
 	var App = _react2["default"].createClass({
 	  displayName: "App",
 
+	  getInitialState: function getInitialState() {
+	    return {
+	      todos: [1, 2, 3, 4]
+	    };
+	  },
 	  render: function render() {
 	    return _react2["default"].createElement(
 	      "div",
@@ -98,7 +103,7 @@
 	        "Todos"
 	      ),
 	      _react2["default"].createElement(_addTodoJs2["default"], null),
-	      _react2["default"].createElement(_todoItemContainerJs2["default"], null),
+	      _react2["default"].createElement(_todoItemContainerJs2["default"], { todos: this.state.todos }),
 	      _react2["default"].createElement(_footerJs2["default"], null)
 	    );
 	  }
@@ -20560,7 +20565,7 @@
 
 
 	// module
-	exports.push([module.id, "body {\n  background: #f6f5f5;\n  font-family: sans-serif;\n}\n", ""]);
+	exports.push([module.id, "body {\n  background: #f6f5f5;\n  font-family: sans-serif;\n}\n\n.container div:nth-child(odd) {\n  background: #f4f7fa;\n}\n", ""]);
 
 	// exports
 
@@ -20897,11 +20902,26 @@
 	  displayName: 'TodoItem',
 
 	  render: function render() {
+	    var styles = {
+	      base: {
+	        textAlign: 'left'
+	      },
+	      input: {
+	        margin: '0 2em'
+	      },
+	      taskComplete: {},
+	      inputComplete: {}
+	    };
+
 	    return _react2['default'].createElement(
 	      'div',
-	      null,
-	      'task: ',
-	      this.props.task
+	      { style: styles.base },
+	      _react2['default'].createElement('input', { style: styles.input, type: 'checkbox' }),
+	      _react2['default'].createElement(
+	        'span',
+	        null,
+	        this.props.task
+	      )
 	    );
 	  }
 	});
@@ -20949,12 +20969,11 @@
 	  },
 
 	  render: function render() {
-	    var todos = [1, 2, 3, 4];
 	    return _react2['default'].createElement(
 	      'div',
 	      { style: styles.base, className: 'container' },
-	      todos.map(function (t) {
-	        return _react2['default'].createElement(_todoItemJs2['default'], { task: t });
+	      this.props.todos.map(function (task, index) {
+	        return _react2['default'].createElement(_todoItemJs2['default'], { task: task });
 	      })
 	    );
 	  }
