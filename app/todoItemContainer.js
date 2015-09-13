@@ -1,5 +1,6 @@
 import React from 'react'
 import TodoItem from './todoItem.js'
+import dragula from 'react-dragula'
 
 var styles = {
   base: {
@@ -9,12 +10,17 @@ var styles = {
 }
 
 const TodoItemContainer = React.createClass({
+  componentDidMount() {
+    var container = React.findDOMNode(this)
+    dragula([container])
+  },
+
   render() {
     var todos = [1,2,3,4]
     return (
-      <div style={styles.base}>
+      <div style={styles.base} className='container'>
         { todos.map((t) => {
-            return <TodoItem />
+            return <TodoItem task={t}/>
           })
         }
       </div>

@@ -2,7 +2,7 @@ import React from 'react'
 
 const TodoItem = React.createClass({
   render() {
-    return <h3>new task</h3>
+    return <div>task: { this.props.task }</div>
   }
 })
 

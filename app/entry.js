@@ -1,4 +1,5 @@
 require("./style.css")
+require("../node_modules/react-dragula/dist/dragula.css")
 
 import React from 'react'
 import AddTodo from './addTodo.js'
