@@ -1,0 +1,21 @@
+{
+  "name": "TictailHack2.2",
+  "version": "1.0.0",
+  "description": "solution to tictail interview challenge",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev-front-end": "webpack --progress --colors --watch",
+    "dev-server": "node server.js"
+  },
+  "author": "Harry Moreno",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.13.3"
+  },
+  "devDependencies": {
+    "css-loader": "^0.18.0",
+    "style-loader": "^0.12.3",
+    "webpack": "^1.12.1"
+  }
+}
