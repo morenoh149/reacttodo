@@ -11,6 +11,7 @@ var styles = {
   base: {
     background: 'white',
     width: '80vw',
+    maxWidth: '550px',
     margin: '0 auto',
     borderRadius: '5px',
     border: '1px solid #eee'
@@ -29,8 +30,8 @@ var styles = {
 const App = React.createClass({
   getInitialState() {
     return {
-      todos: [{ _id: 1, text: 'Demo', completed: false },
-              { _id: 2, text: 'Demo', completed: true }
+      todos: [{ _id: 1, text: 'This a pending task', completed: false },
+              { _id: 2, text: 'this is a completed task', completed: true }
              ]
     }
   },
