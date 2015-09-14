@@ -20,7 +20,9 @@ var styles = {
 const Footer = React.createClass({
   render() {
     return <div className="footer" style={styles.base}>
-      <span style={styles.count}>2 items left</span>
+      <span style={styles.count}>
+        {this.props.tasksRemaining} items left
+      </span>
       <a style={styles.clearer}>Mark all as complete</a>
     </div>
   }

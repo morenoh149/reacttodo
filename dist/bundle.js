@@ -106,7 +106,27 @@
 	      }]
 	    };
 	  },
+	  addTask: function addTask(task) {
+	    if (task.text) {
+	      this.state.todos.push(task);
+	      this.setState(this.state);
+	    }
+	  },
+	  toggleTask: function toggleTask(task) {
+	    var newTodos = this.state.todos.map(function (e) {
+	      if (e === task) {
+	        e.completed = !e.completed;
+	      }
+	      return e;
+	    });
+	    this.setState({
+	      todos: newTodos
+	    });
+	  },
 	  render: function render() {
+	    var tasksRemaining = this.state.todos.filter(function (e) {
+	      return !e.completed;
+	    }).length;
 	    return _react2["default"].createElement(
 	      "div",
 	      { style: styles.base },
@@ -115,9 +135,11 @@
 	        { style: styles.heading },
 	        "Todos"
 	      ),
-	      _react2["default"].createElement(_addTodoJs2["default"], null),
-	      _react2["default"].createElement(_todoItemContainerJs2["default"], { todos: this.state.todos }),
-	      _react2["default"].createElement(_footerJs2["default"], null)
+	      _react2["default"].createElement(_addTodoJs2["default"], { addTask: this.addTask }),
+	      _react2["default"].createElement(_todoItemContainerJs2["default"], {
+	        todos: this.state.todos,
+	        toggleTask: this.toggleTask }),
+	      _react2["default"].createElement(_footerJs2["default"], { tasksRemaining: tasksRemaining })
 	    );
 	  }
 	});
@@ -20902,14 +20924,36 @@
 	var AddTodo = _react2['default'].createClass({
 	  displayName: 'AddTodo',
 
+	  getInitialState: function getInitialState() {
+	    return { value: '' };
+	  },
+	  handleChange: function handleChange(event) {
+	    this.setState({ value: event.target.value });
+	  },
+	  handleClick: function handleClick(event) {
+	    var newTask = {
+	      text: this.state.value,
+	      completed: false
+	    };
+	    this.props.addTask(newTask);
+	    this.state.value = '';
+	  },
 	  render: function render() {
 	    return _react2['default'].createElement(
 	      'div',
 	      { style: styles.base },
-	      _react2['default'].createElement('input', { style: styles.input, type: 'text', placeholder: 'what needs to be done?' }),
+	      _react2['default'].createElement('input', {
+	        id: 'newTask',
+	        style: styles.input,
+	        type: 'text',
+	        placeholder: 'what needs to be done?',
+	        value: this.state.value,
+	        onChange: this.handleChange }),
 	      _react2['default'].createElement(
 	        'button',
-	        { style: styles.button },
+	        {
+	          style: styles.button,
+	          onClick: this.handleClick },
 	        'Add Todo'
 	      )
 	    );
@@ -20935,44 +20979,43 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var styles = {
+	  base: {
+	    textAlign: 'left',
+	    display: 'flex',
+	    flexDirection: 'row',
+	    alignItems: 'center'
+	  },
+	  arrow: {
+	    padding: '0 10px'
+	  },
+	  textComplete: {
+	    flexGrow: 1,
+	    textDecoration: 'line-through',
+	    color: '#ccc'
+	  },
+	  textIncomplete: {
+	    flexGrow: 1
+	  },
+	  input: {
+	    margin: '1em 2em'
+	  }
+	};
+
 	var TodoItem = _react2['default'].createClass({
 	  displayName: 'TodoItem',
 
+	  handleCheck: function handleCheck(event) {
+	    this.props.toggleTask(this.props.task);
+	  },
 	  render: function render() {
-	    var styles = {
-	      base: {
-	        textAlign: 'left',
-	        display: 'flex',
-	        flexDirection: 'row',
-	        alignItems: 'center'
-	      },
-	      arrow: {
-	        padding: '0 10px'
-	      },
-	      textComplete: {
-	        flexGrow: 1,
-	        textDecoration: 'line-through',
-	        color: '#ccc'
-	      },
-	      textIncomplete: {
-	        flexGrow: 1
-	      },
-	      inputComplete: {
-	        margin: '1em 2em'
-	      },
-	      inputIncomplete: {
-	        margin: '1em 2em'
-	      }
-	    };
 	    if (this.props.task.completed) {
-	      var input = _react2['default'].createElement('input', { style: styles.inputComplete, type: 'checkbox', checked: true });
 	      var text = _react2['default'].createElement(
 	        'div',
 	        { style: styles.textComplete },
 	        this.props.task.text
 	      );
 	    } else {
-	      var input = _react2['default'].createElement('input', { style: styles.inputIncomplete, type: 'checkbox' });
 	      var text = _react2['default'].createElement(
 	        'div',
 	        { style: styles.textIncomplete },
@@ -20983,7 +21026,11 @@
 	    return _react2['default'].createElement(
 	      'div',
 	      { style: styles.base, className: 'task' },
-	      input,
+	      _react2['default'].createElement('input', {
+	        style: styles.input,
+	        type: 'checkbox',
+	        defaultChecked: this.props.task.completed,
+	        onChange: this.handleCheck }),
 	      text,
 	      _react2['default'].createElement(
 	        'div',
@@ -21037,11 +21084,16 @@
 	  },
 
 	  render: function render() {
+	    var _this = this;
+
 	    return _react2['default'].createElement(
 	      'div',
 	      { style: styles.base, className: 'container' },
 	      this.props.todos.map(function (task, index) {
-	        return _react2['default'].createElement(_todoItemJs2['default'], { task: task });
+	        return _react2['default'].createElement(_todoItemJs2['default'], {
+	          task: task,
+	          key: index,
+	          toggleTask: _this.props.toggleTask });
 	      })
 	    );
 	  }
@@ -21093,7 +21145,8 @@
 	      _react2['default'].createElement(
 	        'span',
 	        { style: styles.count },
-	        '2 items left'
+	        this.props.tasksRemaining,
+	        ' items left'
 	      ),
 	      _react2['default'].createElement(
 	        'a',

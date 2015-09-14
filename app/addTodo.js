@@ -20,10 +20,35 @@ var styles = {
   }
 }
 const AddTodo = React.createClass({
+  getInitialState() {
+    return { value: '' }
+  },
+  handleChange(event) {
+    this.setState({value: event.target.value})
+  },
+  handleClick(event) {
+    var newTask = {
+      text: this.state.value,
+      completed: false
+    }
+    this.props.addTask(newTask)
+    this.state.value = ''
+  },
   render() {
     return <div style={styles.base}>
-      <input style={styles.input} type="text" placeholder="what needs to be done?"></input>
-      <button style={styles.button}>Add Todo</button>
+      <input
+        id="newTask"
+        style={styles.input}
+        type="text"
+        placeholder="what needs to be done?"
+        value={this.state.value}
+        onChange={this.handleChange} >
+      </input>
+      <button
+        style={styles.button}
+        onClick={this.handleClick} >
+        Add Todo
+      </button>
     </div>
   }
 })

@@ -29,27 +29,50 @@ const App = React.createClass({
   getInitialState() {
     return {
       todos: [{
-        text: 'Discuss report with john',
-        completed: false
-      },{
-        text: 'Get a haircut',
-        completed: true
-      },{
-        text: 'Pay electricity bill',
-        completed: true
-      },{
-        text: 'Check gym hours',
-        completed: false
-      }]
+          text: 'Discuss report with john',
+          completed: false
+        },{
+          text: 'Get a haircut',
+          completed: true
+        },{
+          text: 'Pay electricity bill',
+          completed: true
+        },{
+          text: 'Check gym hours',
+          completed: false
+        }
+      ]
     }
   },
+  addTask(task) {
+    if(task.text) {
+      this.state.todos.push(task)
+      this.setState(this.state)
+    }
+  },
+  toggleTask(task) {
+    var newTodos = this.state.todos.map(function(e){
+      if(e === task) {
+        e.completed = !e.completed
+      }
+      return e
+    })
+    this.setState({
+      todos: newTodos
+    })
+  },
   render() {
+    var tasksRemaining = this.state.todos.filter(function(e){
+      return !e.completed
+    }).length
     return (
      <div style={styles.base}>
         <h1 style={styles.heading}>Todos</h1>
-        <AddTodo />
-        <TodoItemContainer todos={this.state.todos} />
-        <Footer />
+        <AddTodo addTask={this.addTask} />
+        <TodoItemContainer
+          todos={this.state.todos}
+          toggleTask={this.toggleTask} />
+        <Footer tasksRemaining={tasksRemaining} />
       </div>
     )
   }

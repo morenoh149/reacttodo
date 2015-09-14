@@ -19,7 +19,10 @@ const TodoItemContainer = React.createClass({
     return (
       <div style={styles.base} className='container'>
         { this.props.todos.map((task, index) => {
-            return <TodoItem task={task} />
+            return <TodoItem
+                    task={task}
+                    key={index}
+                    toggleTask={this.props.toggleTask} />
           })
         }
       </div>
