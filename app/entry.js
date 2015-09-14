@@ -9,7 +9,6 @@ import Footer from './footer.js'
 var styles = {
   base: {
     background: 'white',
-    textAlign: 'center',
     width: '80vw',
     margin: '0 auto',
     borderRadius: '5px',
@@ -17,6 +16,8 @@ var styles = {
   },
   heading: {
     padding: '1em 0',
+    margin: 0,
+    textAlign: 'center',
     borderBottom: '1px dashed #ccc'
   }
 }
@@ -27,7 +28,19 @@ var styles = {
 const App = React.createClass({
   getInitialState() {
     return {
-      todos: [1,2,3,4]
+      todos: [{
+        text: 'Discuss report with john',
+        completed: false
+      },{
+        text: 'Get a haircut',
+        completed: true
+      },{
+        text: 'Pay electricity bill',
+        completed: true
+      },{
+        text: 'Check gym hours',
+        completed: false
+      }]
     }
   },
   render() {

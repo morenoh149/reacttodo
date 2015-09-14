@@ -70,7 +70,6 @@
 	var styles = {
 	  base: {
 	    background: 'white',
-	    textAlign: 'center',
 	    width: '80vw',
 	    margin: '0 auto',
 	    borderRadius: '5px',
@@ -78,6 +77,8 @@
 	  },
 	  heading: {
 	    padding: '1em 0',
+	    margin: 0,
+	    textAlign: 'center',
 	    borderBottom: '1px dashed #ccc'
 	  }
 	};
@@ -90,7 +91,19 @@
 
 	  getInitialState: function getInitialState() {
 	    return {
-	      todos: [1, 2, 3, 4]
+	      todos: [{
+	        text: 'Discuss report with john',
+	        completed: false
+	      }, {
+	        text: 'Get a haircut',
+	        completed: true
+	      }, {
+	        text: 'Pay electricity bill',
+	        completed: true
+	      }, {
+	        text: 'Check gym hours',
+	        completed: false
+	      }]
 	    };
 	  },
 	  render: function render() {
@@ -20565,7 +20578,7 @@
 
 
 	// module
-	exports.push([module.id, "body {\n  background: #f6f5f5;\n  font-family: sans-serif;\n}\n\n.container div:nth-child(odd) {\n  background: #f4f7fa;\n}\n", ""]);
+	exports.push([module.id, "body {\n  background: #f6f5f5;\n  font-family: sans-serif;\n}\n\n.container div:nth-child(odd).task {\n  background: #f4f7fa;\n}\n\ndiv.arrow {\n  color: transparent;\n}\ndiv.arrow:hover {\n  color: black;\n}\n", ""]);
 
 	// exports
 
@@ -20867,14 +20880,38 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var styles = {
+	  base: {
+	    display: 'flex',
+	    flexDirection: 'row'
+	  },
+	  input: {
+	    flexGrow: 1,
+	    margin: '1em',
+	    height: '2em',
+	    fontSize: '1em',
+	    borderRadius: '5px'
+	  },
+	  button: {
+	    margin: '1em 1em 1em 0',
+	    padding: '0 20px',
+	    fontSize: '1em',
+	    borderRadius: '5px'
+	  }
+	};
 	var AddTodo = _react2['default'].createClass({
 	  displayName: 'AddTodo',
 
 	  render: function render() {
 	    return _react2['default'].createElement(
-	      'h2',
-	      null,
-	      'what needs to be done? [button]'
+	      'div',
+	      { style: styles.base },
+	      _react2['default'].createElement('input', { style: styles.input, type: 'text', placeholder: 'what needs to be done?' }),
+	      _react2['default'].createElement(
+	        'button',
+	        { style: styles.button },
+	        'Add Todo'
+	      )
 	    );
 	  }
 	});
@@ -20904,23 +20941,54 @@
 	  render: function render() {
 	    var styles = {
 	      base: {
-	        textAlign: 'left'
+	        textAlign: 'left',
+	        display: 'flex',
+	        flexDirection: 'row',
+	        alignItems: 'center'
 	      },
-	      input: {
-	        margin: '0 2em'
+	      arrow: {
+	        padding: '0 10px'
 	      },
-	      taskComplete: {},
-	      inputComplete: {}
+	      textComplete: {
+	        flexGrow: 1,
+	        textDecoration: 'line-through',
+	        color: '#ccc'
+	      },
+	      textIncomplete: {
+	        flexGrow: 1
+	      },
+	      inputComplete: {
+	        margin: '1em 2em'
+	      },
+	      inputIncomplete: {
+	        margin: '1em 2em'
+	      }
 	    };
+	    if (this.props.task.completed) {
+	      var input = _react2['default'].createElement('input', { style: styles.inputComplete, type: 'checkbox', checked: true });
+	      var text = _react2['default'].createElement(
+	        'div',
+	        { style: styles.textComplete },
+	        this.props.task.text
+	      );
+	    } else {
+	      var input = _react2['default'].createElement('input', { style: styles.inputIncomplete, type: 'checkbox' });
+	      var text = _react2['default'].createElement(
+	        'div',
+	        { style: styles.textIncomplete },
+	        this.props.task.text
+	      );
+	    }
 
 	    return _react2['default'].createElement(
 	      'div',
-	      { style: styles.base },
-	      _react2['default'].createElement('input', { style: styles.input, type: 'checkbox' }),
+	      { style: styles.base, className: 'task' },
+	      input,
+	      text,
 	      _react2['default'].createElement(
-	        'span',
-	        null,
-	        this.props.task
+	        'div',
+	        { style: styles.arrow, className: 'arrow' },
+	        '⇕'
 	      )
 	    );
 	  }
@@ -20998,14 +21066,40 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var styles = {
+	  base: {
+	    display: 'flex',
+	    flexDirection: 'row'
+	  },
+	  count: {
+	    flexGrow: 1,
+	    padding: '15px',
+	    color: '#777'
+	  },
+	  clearer: {
+	    padding: '15px',
+	    textDecoration: 'none',
+	    color: 'blue'
+	  }
+	};
+
 	var Footer = _react2['default'].createClass({
 	  displayName: 'Footer',
 
 	  render: function render() {
 	    return _react2['default'].createElement(
-	      'h4',
-	      null,
-	      '2 items left'
+	      'div',
+	      { className: 'footer', style: styles.base },
+	      _react2['default'].createElement(
+	        'span',
+	        { style: styles.count },
+	        '2 items left'
+	      ),
+	      _react2['default'].createElement(
+	        'a',
+	        { style: styles.clearer },
+	        'Mark all as complete'
+	      )
 	    );
 	  }
 	});
