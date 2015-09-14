@@ -38,7 +38,7 @@ const TodoItem = React.createClass({
         <input
           style={styles.input}
           type="checkbox"
-          defaultChecked={this.props.task.completed}
+          checked={this.props.task.completed}
           onChange={this.handleCheck} />
         { text }
         <div style={styles.arrow} className="arrow">

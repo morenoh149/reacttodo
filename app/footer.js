@@ -23,7 +23,11 @@ const Footer = React.createClass({
       <span style={styles.count}>
         {this.props.tasksRemaining} items left
       </span>
-      <a style={styles.clearer}>Mark all as complete</a>
+      <a
+        style={styles.clearer}
+        onClick={this.props.clearTasks}>
+        Mark all as complete
+      </a>
     </div>
   }
 })

@@ -50,6 +50,14 @@ const App = React.createClass({
       this.setState(this.state)
     }
   },
+  clearTasks(){
+    this.setState({
+      todos: this.state.todos.map(function(e){
+        e.completed = true
+        return e
+      })
+    })
+  },
   toggleTask(task) {
     var newTodos = this.state.todos.map(function(e){
       if(e === task) {
@@ -72,7 +80,10 @@ const App = React.createClass({
         <TodoItemContainer
           todos={this.state.todos}
           toggleTask={this.toggleTask} />
-        <Footer tasksRemaining={tasksRemaining} />
+        <Footer
+          tasksRemaining={tasksRemaining}
+          clearTasks={this.clearTasks}
+          />
       </div>
     )
   }

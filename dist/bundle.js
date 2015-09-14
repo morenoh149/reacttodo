@@ -112,6 +112,14 @@
 	      this.setState(this.state);
 	    }
 	  },
+	  clearTasks: function clearTasks() {
+	    this.setState({
+	      todos: this.state.todos.map(function (e) {
+	        e.completed = true;
+	        return e;
+	      })
+	    });
+	  },
 	  toggleTask: function toggleTask(task) {
 	    var newTodos = this.state.todos.map(function (e) {
 	      if (e === task) {
@@ -139,7 +147,10 @@
 	      _react2["default"].createElement(_todoItemContainerJs2["default"], {
 	        todos: this.state.todos,
 	        toggleTask: this.toggleTask }),
-	      _react2["default"].createElement(_footerJs2["default"], { tasksRemaining: tasksRemaining })
+	      _react2["default"].createElement(_footerJs2["default"], {
+	        tasksRemaining: tasksRemaining,
+	        clearTasks: this.clearTasks
+	      })
 	    );
 	  }
 	});
@@ -21029,7 +21040,7 @@
 	      _react2['default'].createElement('input', {
 	        style: styles.input,
 	        type: 'checkbox',
-	        defaultChecked: this.props.task.completed,
+	        checked: this.props.task.completed,
 	        onChange: this.handleCheck }),
 	      text,
 	      _react2['default'].createElement(
@@ -21150,7 +21161,9 @@
 	      ),
 	      _react2['default'].createElement(
 	        'a',
-	        { style: styles.clearer },
+	        {
+	          style: styles.clearer,
+	          onClick: this.props.clearTasks },
 	        'Mark all as complete'
 	      )
 	    );
