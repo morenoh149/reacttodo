@@ -5,6 +5,7 @@ import React from 'react'
 import AddTodo from './addTodo.js'
 import TodoItemContainer from './todoItemContainer.js'
 import Footer from './footer.js'
+import request from 'superagent'
 
 var styles = {
   base: {
@@ -29,20 +30,31 @@ const App = React.createClass({
   getInitialState() {
     return {
       todos: [{
-          text: 'Discuss report with john',
+          _id: 1,
+          text: 'Demo',
           completed: false
         },{
-          text: 'Get a haircut',
+          _id: 2,
+          text: 'Demo',
           completed: true
         },{
-          text: 'Pay electricity bill',
-          completed: true
-        },{
-          text: 'Check gym hours',
+          _id: 3,
+          text: 'Demo',
           completed: false
         }
       ]
     }
+  },
+  componentDidMount() {
+    request
+      .get('/todos')
+      .end(function(err, res) {
+        if(err) {
+          // do something
+        }
+        console.log(res)
+      })
+
   },
   addTask(task) {
     if(task.text) {

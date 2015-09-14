@@ -1,0 +1,24 @@
+{
+  "todos": [
+    {
+      "_id": 1,
+      "text": "Discuss report with john",
+      "completed": false
+    },
+    {
+      "_id": 2,
+      "text": "Get a haircut",
+      "completed": true
+    },
+    {
+      "_id": 3,
+      "text": "Pay electricity bill",
+      "completed": true
+    },
+    {
+      "_id": 4,
+      "text": "Check gym hours",
+      "completed": false
+    }
+  ]
+}
