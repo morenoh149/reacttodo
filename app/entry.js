@@ -67,6 +67,9 @@ const App = React.createClass({
         return e
       })
     })
+    request
+      .put('/todos/finishall')
+      .end()
   },
   toggleTask(task) {
     var newTodos = this.state.todos.map(function(e){
@@ -78,6 +81,10 @@ const App = React.createClass({
     this.setState({
       todos: newTodos
     })
+    request
+      .put('/todos/' + task._id)
+      .send(task)
+      .end()
   },
   render() {
     var tasksRemaining = this.state.todos.filter(function(e){

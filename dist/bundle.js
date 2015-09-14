@@ -128,6 +128,7 @@
 	        return e;
 	      })
 	    });
+	    _superagent2["default"].put('/todos/finishall').end();
 	  },
 	  toggleTask: function toggleTask(task) {
 	    var newTodos = this.state.todos.map(function (e) {
@@ -139,6 +140,7 @@
 	    this.setState({
 	      todos: newTodos
 	    });
+	    _superagent2["default"].put('/todos/' + task._id).send(task).end();
 	  },
 	  render: function render() {
 	    var tasksRemaining = this.state.todos.filter(function (e) {

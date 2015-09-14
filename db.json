@@ -8,12 +8,12 @@
     {
       "_id": 2,
       "text": "Get a haircut",
-      "completed": true
+      "completed": false
     },
     {
       "_id": 3,
       "text": "Pay electricity bill",
-      "completed": true
+      "completed": false
     },
     {
       "_id": 4,
