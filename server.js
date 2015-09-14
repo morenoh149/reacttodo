@@ -2,8 +2,10 @@ var express = require('express');
 var app = express();
 var low = require('lowdb')
 var db = low('db.json')
+var bodyParser = require('body-parser');
 
 app.use(express.static('dist'));
+app.use(bodyParser.json());
 
 // return all tasks
 app.get('/todos', function(req, res){
@@ -12,6 +14,7 @@ app.get('/todos', function(req, res){
 
 // create new task
 app.post('/todos', function(req, res){
+  db('todos').push(req.body)
 })
 
 // mark task complete

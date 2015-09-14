@@ -29,37 +29,35 @@ var styles = {
 const App = React.createClass({
   getInitialState() {
     return {
-      todos: [{
-          _id: 1,
-          text: 'Demo',
-          completed: false
-        },{
-          _id: 2,
-          text: 'Demo',
-          completed: true
-        },{
-          _id: 3,
-          text: 'Demo',
-          completed: false
-        }
-      ]
+      todos: [{ _id: 1, text: 'Demo', completed: false },
+              { _id: 2, text: 'Demo', completed: true }
+             ]
     }
   },
   componentDidMount() {
     request
       .get('/todos')
-      .end(function(err, res) {
-        if(err) {
-          // do something
+      .end((err, res) => {
+        if(res.ok){
+          this.setState({ todos: res.body })
+        } else {
+          console.log(err)
         }
-        console.log(res)
       })
-
   },
   addTask(task) {
     if(task.text) {
+      task._id = this.state.todos.length + 1
       this.state.todos.push(task)
       this.setState(this.state)
+      request
+        .post('/todos')
+        .send(task)
+        .end(function(err, res){
+          if(res.status !== 200){
+            console.log('task not persisted to backend')
+          }
+        })
     }
   },
   clearTasks(){
@@ -85,6 +83,7 @@ const App = React.createClass({
     var tasksRemaining = this.state.todos.filter(function(e){
       return !e.completed
     }).length
+
     return (
      <div style={styles.base}>
         <h1 style={styles.heading}>Todos</h1>

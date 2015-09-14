@@ -6,11 +6,13 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev-front-end": "webpack --progress --colors --watch",
-    "dev-server": "node server.js"
+    "dev-server": "node server.js",
+    "start": "npm dev-front-end & npm dev-server"
   },
   "author": "Harry Moreno",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.13.3",
     "express": "^4.13.3",
     "lowdb": "^0.10.2",
     "react": "^0.13.3",

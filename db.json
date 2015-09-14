@@ -19,6 +19,11 @@
       "_id": 4,
       "text": "Check gym hours",
       "completed": false
+    },
+    {
+      "text": "a new task",
+      "completed": false,
+      "_id": 5
     }
   ]
 }
