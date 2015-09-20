@@ -20705,7 +20705,8 @@
 	    alignItems: 'center'
 	  },
 	  arrow: {
-	    padding: '0 10px'
+	    padding: '0 10px',
+	    fontSize: '2em'
 	  },
 	  textComplete: {
 	    flexGrow: 1,
@@ -20727,19 +20728,12 @@
 	    this.props.toggleTask(this.props.task);
 	  },
 	  render: function render() {
-	    if (this.props.task.completed) {
-	      var text = _react2['default'].createElement(
-	        'div',
-	        { style: styles.textComplete },
-	        this.props.task.text
-	      );
-	    } else {
-	      var text = _react2['default'].createElement(
-	        'div',
-	        { style: styles.textIncomplete },
-	        this.props.task.text
-	      );
-	    }
+	    var text = _react2['default'].createElement(
+	      'div',
+	      {
+	        style: this.props.task.completed ? styles.textComplete : styles.textIncomplete },
+	      this.props.task.text
+	    );
 
 	    return _react2['default'].createElement(
 	      'div',
@@ -23175,7 +23169,7 @@
 
 
 	// module
-	exports.push([module.id, "body {\n  background: #f6f5f5;\n  font-family: sans-serif;\n}\n\n.container div:nth-child(odd).task {\n  background: #f4f7fa;\n}\n\ndiv.arrow {\n  color: transparent;\n}\ndiv.arrow:hover {\n  color: black;\n}\n", ""]);
+	exports.push([module.id, "body {\n  background: #f6f5f5;\n  font-family: sans-serif;\n}\n\n.container div:nth-child(odd).task {\n  background: #f4f7fa;\n}\n\ndiv.arrow {\n  color: transparent;\n}\ndiv.task:hover div.arrow {\n  color: blue;\n}\n", ""]);
 
 	// exports
 
