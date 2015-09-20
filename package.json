@@ -6,8 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev-front-end": "webpack --progress --colors --watch",
+    "build-front-end": "webpack --progress --colors",
     "dev-server": "node server.js",
-    "start": "npm dev-front-end & npm dev-server"
+    "start": "npm run build-front-end; npm run dev-server"
   },
   "author": "Harry Moreno",
   "license": "ISC",
