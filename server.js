@@ -14,7 +14,11 @@ app.get('/todos', function(req, res){
 
 // create new task
 app.post('/todos', function(req, res){
-  res.status(200).send(db('todos').push(req.body))
+  res
+    .status(200)
+    .send(db('todos')
+          .push(req.body)
+         )
 })
 
 // mark all tasks complete
