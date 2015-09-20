@@ -20727,19 +20727,12 @@
 	    this.props.toggleTask(this.props.task);
 	  },
 	  render: function render() {
-	    if (this.props.task.completed) {
-	      var text = _react2['default'].createElement(
-	        'div',
-	        { style: styles.textComplete },
-	        this.props.task.text
-	      );
-	    } else {
-	      var text = _react2['default'].createElement(
-	        'div',
-	        { style: styles.textIncomplete },
-	        this.props.task.text
-	      );
-	    }
+	    var text = _react2['default'].createElement(
+	      'div',
+	      {
+	        style: this.props.task.completed ? styles.textComplete : styles.textIncomplete },
+	      this.props.task.text
+	    );
 
 	    return _react2['default'].createElement(
 	      'div',

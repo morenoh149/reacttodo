@@ -28,11 +28,12 @@ const TodoItem = React.createClass({
     this.props.toggleTask(this.props.task)
   },
   render() {
-    if(this.props.task.completed) {
-      var text = <div style={styles.textComplete}>{ this.props.task.text }</div>
-    } else {
-      var text = <div style={styles.textIncomplete}>{ this.props.task.text }</div>
-    }
+    var text = <div
+        style={ this.props.task.completed ?
+                  styles.textComplete :
+                  styles.textIncomplete }>
+        { this.props.task.text }
+      </div>
 
     return <div style={styles.base} className="task">
         <input
