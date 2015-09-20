@@ -10,6 +10,6 @@ body {
 div.arrow {
   color: transparent;
 }
-div.arrow:hover {
-  color: black;
+div.task:hover div.arrow {
+  color: blue;
 }

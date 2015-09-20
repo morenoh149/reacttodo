@@ -8,7 +8,8 @@ var styles = {
     alignItems: 'center'
   },
   arrow: {
-    padding: '0 10px'
+    padding: '0 10px',
+    fontSize: '2em'
   },
   textComplete: {
     flexGrow: 1,
