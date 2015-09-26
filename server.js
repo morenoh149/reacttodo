@@ -23,13 +23,8 @@ app.post('/todos', function(req, res){
 
 // mark all tasks complete
 app.put('/todos/finishall', function(req, res){
-  // using forEach due to lowdb limitations
   db('todos').forEach(function(t){
-    db('todos')
-      .chain()
-      .find({_id: t._id})
-      .assign({ completed: true})
-      .value()
+    t.completed = true
   })
   res.status(200).send()
 })
