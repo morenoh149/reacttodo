@@ -5,7 +5,8 @@ var styles = {
     textAlign: 'left',
     display: 'flex',
     flexDirection: 'row',
-    alignItems: 'center'
+    alignItems: 'center',
+    cursor: 'grab'
   },
   arrow: {
     padding: '0 10px',
@@ -30,9 +31,9 @@ const TodoItem = React.createClass({
   },
   render() {
     var text = <div
-        style={ this.props.task.completed ?
-                  styles.textComplete :
-                  styles.textIncomplete }>
+          style={ this.props.task.completed ?
+            styles.textComplete :
+            styles.textIncomplete }>
         { this.props.task.text }
       </div>
 
